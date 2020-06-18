@@ -286,6 +286,7 @@ Returns a set of supported MIME types.
 - [`raf`](https://en.wikipedia.org/wiki/Raw_image_format) - Fujifilm RAW image file
 - [`tif`](https://en.wikipedia.org/wiki/Tagged_Image_File_Format)
 - [`bmp`](https://en.wikipedia.org/wiki/BMP_file_format)
+- [`icns`](https://en.wikipedia.org/wiki/Apple_Icon_Image_format)
 - [`jxr`](https://en.wikipedia.org/wiki/JPEG_XR)
 - [`psd`](https://en.wikipedia.org/wiki/Adobe_Photoshop#File_format)
 - [`zip`](https://en.wikipedia.org/wiki/Zip_(file_format))
@@ -395,6 +396,11 @@ Returns a set of supported MIME types.
 - [`s3m`](https://wiki.openmpt.org/Manual:_Module_formats#The_ScreamTracker_3_format_.28.s3m.29) - Audio module format: ScreamTracker 3
 - [`xm`](https://wiki.openmpt.org/Manual:_Module_formats#The_FastTracker_2_format_.28.xm.29) - Audio module format: FastTracker 2
 - [`ai`](https://en.wikipedia.org/wiki/Adobe_Illustrator_Artwork) - Adobe Illustrator Artwork
+- [`skp`](https://en.wikipedia.org/wiki/SketchUp) - SketchUp
+- [`avif`](https://en.wikipedia.org/wiki/AV1#AV1_Image_File_Format_(AVIF)) - AV1 Image File Format
+- [`eps`](https://en.wikipedia.org/wiki/Encapsulated_PostScript) - Encapsulated PostScript
+- [`lzh`](https://en.wikipedia.org/wiki/LHA_(file_format)) - LZH archive
+- [`pgp`](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) - Pretty Good Privacy
 
 *Pull requests are welcome for additional commonly used file types.*
 

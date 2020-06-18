@@ -18,6 +18,7 @@ module.exports = {
 		'raf',
 		'tif',
 		'bmp',
+		'icns',
 		'jxr',
 		'psd',
 		'zip',
@@ -126,7 +127,12 @@ module.exports = {
 		'it',
 		's3m',
 		'xm',
-		'ai'
+		'ai',
+		'skp',
+		'avif',
+		'eps',
+		'lzh',
+		'pgp'
 	],
 	mimeTypes: [
 		'image/jpeg',
@@ -192,6 +198,7 @@ module.exports = {
 		'image/x-icon',
 		'video/x-flv',
 		'application/postscript',
+		'application/eps',
 		'application/x-xz',
 		'application/x-sqlite3',
 		'application/x-nintendo-nes-rom',
@@ -219,6 +226,7 @@ module.exports = {
 		'image/heif-sequence',
 		'image/heic',
 		'image/heic-sequence',
+		'image/icns',
 		'image/ktx',
 		'application/dicom',
 		'audio/x-musepack',
@@ -246,6 +254,10 @@ module.exports = {
 		'audio/x-s3m',
 		'audio/x-xm',
 		'video/MP1S',
-		'video/MP2P'
+		'video/MP2P',
+		'application/vnd.sketchup.skp',
+		'image/avif',
+		'application/x-lzh-compressed',
+		'application/pgp-encrypted'
 	]
 };

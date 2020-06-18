@@ -20,6 +20,7 @@ declare namespace core {
 		| 'raf'
 		| 'tif'
 		| 'bmp'
+		| 'icns'
 		| 'jxr'
 		| 'psd'
 		| 'zip'
@@ -128,7 +129,12 @@ declare namespace core {
 		| 'it'
 		| 's3m'
 		| 'xm'
-		| 'ai';
+		| 'ai'
+		| 'skp'
+		| 'avif'
+		| 'eps'
+		| 'lzh'
+		| 'pgp';
 
 	type MimeType =
 		| 'image/jpeg'
@@ -140,6 +146,7 @@ declare namespace core {
 		| 'image/x-canon-cr3'
 		| 'image/tiff'
 		| 'image/bmp'
+		| 'image/icns'
 		| 'image/vnd.ms-photo'
 		| 'image/vnd.adobe.photoshop'
 		| 'application/epub+zip'
@@ -193,6 +200,7 @@ declare namespace core {
 		| 'image/x-icon'
 		| 'video/x-flv'
 		| 'application/postscript'
+		| 'application/eps'
 		| 'application/x-xz'
 		| 'application/x-sqlite3'
 		| 'application/x-nintendo-nes-rom'
@@ -248,7 +256,11 @@ declare namespace core {
 		| 'audio/x-s3m'
 		| 'audio/x-xm'
 		| 'video/MP1S'
-		| 'video/MP2P';
+		| 'video/MP2P'
+		| 'application/vnd.sketchup.skp'
+		| 'image/avif'
+		| 'application/x-lzh-compressed'
+		| 'application/pgp-encrypted';
 
 	interface FileTypeResult {
 		/**

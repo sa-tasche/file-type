@@ -1,6 +1,6 @@
 {
 	"name": "file-type",
-	"version": "14.1.4",
+	"version": "14.6.2",
 	"description": "Detect the file type of a Buffer/Uint8Array/ArrayBuffer",
 	"license": "MIT",
 	"repository": "sindresorhus/file-type",
@@ -63,6 +63,7 @@
 		"raf",
 		"tif",
 		"bmp",
+		"icns",
 		"jxr",
 		"psd",
 		"zip",
@@ -171,7 +172,12 @@
 		"it",
 		"s3m",
 		"xm",
-		"ai"
+		"ai",
+		"skp",
+		"avif",
+		"eps",
+		"lzh",
+		"pgp"
 	],
 	"devDependencies": {
 		"@types/node": "^13.1.4",
@@ -183,7 +189,7 @@
 	},
 	"dependencies": {
 		"readable-web-to-node-stream": "^2.0.0",
-		"strtok3": "^6.0.0",
+		"strtok3": "^6.0.3",
 		"token-types": "^2.0.0",
 		"typedarray-to-buffer": "^3.1.5"
 	},

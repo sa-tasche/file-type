@@ -120,6 +120,16 @@ async function _fromTokenizer(tokenizer) {
 	}
 
 	if (check([0x25, 0x21])) {
+		await tokenizer.peekBuffer(buffer, {length: 24, mayBeLess: true});
+
+		if (checkString('PS-Adobe-', {offset: 2}) &&
+			checkString(' EPSF-', {offset: 14})) {
+			return {
+				ext: 'eps',
+				mime: 'application/eps'
+			};
+		}
+
 		return {
 			ext: 'ps',
 			mime: 'application/postscript'
@@ -244,6 +254,13 @@ async function _fromTokenizer(tokenizer) {
 		};
 	}
 
+	if (checkString('icns', {offset: 0})) {
+		return {
+			ext: 'icns',
+			mime: 'image/icns'
+		};
+	}
+
 	// Zip-based file formats
 	// Need to be before the `zip` check
 	if (check([0x50, 0x4B, 0x3, 0x4])) { // Local file header signature
@@ -336,7 +353,20 @@ async function _fromTokenizer(tokenizer) {
 					}
 				}
 
-				await tokenizer.ignore(zipHeader.compressedSize);
+				// Try to find next header manually when current one is corrupted
+				if (zipHeader.compressedSize === 0) {
+					let nextHeaderIndex = -1;
+
+					while (nextHeaderIndex < 0 && (tokenizer.position < tokenizer.fileInfo.size)) {
+						await tokenizer.peekBuffer(buffer, {mayBeLess: true});
+
+						nextHeaderIndex = buffer.indexOf('504B0304', 0, 'hex');
+						// Move position to the next header if found, skip the whole buffer otherwise
+						await tokenizer.ignore(nextHeaderIndex >= 0 ? nextHeaderIndex : buffer.length);
+					}
+				} else {
+					await tokenizer.ignore(zipHeader.compressedSize);
+				}
 			}
 		} catch (error) {
 			if (!(error instanceof strtok3.EndOfStreamError)) {
@@ -436,6 +466,8 @@ async function _fromTokenizer(tokenizer) {
 		// For some cases, we're specific, everything else falls to `video/mp4` with `mp4` extension.
 		const brandMajor = uint8ArrayUtf8ByteString(buffer, 8, 12).replace('\0', ' ').trim();
 		switch (brandMajor) {
+			case 'avif':
+				return {ext: 'avif', mime: 'image/avif'};
 			case 'mif1':
 				return {ext: 'heic', mime: 'image/heif'};
 			case 'msf1':
@@ -766,6 +798,13 @@ async function _fromTokenizer(tokenizer) {
 		};
 	}
 
+	if (check([0xC5, 0xD0, 0xD3, 0xC6])) {
+		return {
+			ext: 'eps',
+			mime: 'application/eps'
+		};
+	}
+
 	// -- 5-byte signatures --
 
 	if (check([0x4F, 0x54, 0x54, 0x4F, 0x00])) {
@@ -800,6 +839,26 @@ async function _fromTokenizer(tokenizer) {
 		return {
 			ext: 'it',
 			mime: 'audio/x-it'
+		};
+	}
+
+	if (
+		checkString('-lh0-', {offset: 2}) ||
+		checkString('-lh1-', {offset: 2}) ||
+		checkString('-lh2-', {offset: 2}) ||
+		checkString('-lh3-', {offset: 2}) ||
+		checkString('-lh4-', {offset: 2}) ||
+		checkString('-lh5-', {offset: 2}) ||
+		checkString('-lh6-', {offset: 2}) ||
+		checkString('-lh7-', {offset: 2}) ||
+		checkString('-lzs-', {offset: 2}) ||
+		checkString('-lz4-', {offset: 2}) ||
+		checkString('-lz5-', {offset: 2}) ||
+		checkString('-lhd-', {offset: 2})
+	) {
+		return {
+			ext: 'lzh',
+			mime: 'application/x-lzh-compressed'
 		};
 	}
 
@@ -1226,6 +1285,20 @@ async function _fromTokenizer(tokenizer) {
 		return {
 			ext: 'tar',
 			mime: 'application/x-tar'
+		};
+	}
+
+	if (check([0xFF, 0xFE, 0xFF, 0x0E, 0x53, 0x00, 0x6B, 0x00, 0x65, 0x00, 0x74, 0x00, 0x63, 0x00, 0x68, 0x00, 0x55, 0x00, 0x70, 0x00, 0x20, 0x00, 0x4D, 0x00, 0x6F, 0x00, 0x64, 0x00, 0x65, 0x00, 0x6C, 0x00])) {
+		return {
+			ext: 'skp',
+			mime: 'application/vnd.sketchup.skp'
+		};
+	}
+
+	if (checkString('-----BEGIN PGP MESSAGE-----')) {
+		return {
+			ext: 'pgp',
+			mime: 'application/pgp-encrypted'
 		};
 	}
 
